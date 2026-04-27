@@ -1,31 +1,88 @@
 #!/bin/bash
 
-# Usage: new-python-project <project-name>
+# Usage: new-python-project <project-name> [options]
+# Templates: scripts (default), api, package, data, cli
 
-if [ -z "$1" ] || [ "$1" == "--help" ] || [ "$1" == "-h" ]; then
-  echo "Usage: new-python-project <project-name>"
-  echo "Creates a new Python project in ~/projects/source/repos/<project-name>"
-  exit 0
+TEMPLATE="scripts"
+PROJECT_NAME=""
+AUTHOR="$(git config user.name)"
+EMAIL="$(git config user.email)"
+PYTHON_VERSION="$(python3 --version | cut -d' ' -f2 | cut -d'.' -f1,2)"
+DESCRIPTION="A short description of the project"
+
+# Parse arguments
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    --template|-t)
+      TEMPLATE="$2"
+      shift 2
+      ;;
+    --author|-a)
+      AUTHOR="$2"
+      shift 2
+      ;;
+    --email|-e)
+      EMAIL="$2"
+      shift 2
+      ;;
+    --python|-p)
+      PYTHON_VERSION="$2"
+      shift 2
+      ;;
+    --description|-d)
+      DESCRIPTION="$2"
+      shift 2
+      ;;
+    --help|-h)
+      echo "Usage: new-python-project <project-name> [options]"
+      echo ""
+      echo "Options:"
+      echo "  --template,    -t  Template to use (default: scripts)"
+      echo "  --author,      -a  Project author (default: git config user.name)"
+      echo "  --email,       -e  Author email (default: git config user.email)"
+      echo "  --python,      -p  Python version (default: current python3 version)"
+      echo "  --description, -d  Project description"
+      echo ""
+      echo "Templates: scripts, api, package, data, cli"
+      exit 0
+      ;;
+    *)
+      PROJECT_NAME="$1"
+      shift
+      ;;
+  esac
+done
+
+if [ -z "$PROJECT_NAME" ]; then
+  echo "Error: project name is required"
+  echo "Usage: new-python-project <project-name> [options]"
+  exit 1
 fi
 
-PROJECT_NAME=$1
-PROJECT_DIR="$HOME/projects/source/repos/$PROJECT_NAME"
-TEMPLATE_DIR="$HOME/dotfiles/templates/python-project"
+TEMPLATE_DIR="$HOME/dotfiles/templates/$TEMPLATE"
 
-# Create project directory
-mkdir -p "$PROJECT_DIR"
-cd "$PROJECT_DIR"
+if [ ! -d "$TEMPLATE_DIR" ]; then
+  echo "Error: template '$TEMPLATE' not found at $TEMPLATE_DIR"
+  echo "Available templates: scripts, api, package, data, cli"
+  exit 1
+fi
 
-# Copy template files
-cp -r "$TEMPLATE_DIR/." .
+cd ~/projects/source/repos
+cookiecutter "$TEMPLATE_DIR" \
+  --no-input \
+  project_name="$PROJECT_NAME" \
+  author="$AUTHOR" \
+  email="$EMAIL" \
+  python_version="$PYTHON_VERSION" \
+  description="$DESCRIPTION"
 
-# Initialize git
-git init
+echo ""
+echo "⚙️  Running make install..."
+cd "$HOME/projects/source/repos/$PROJECT_NAME"
+make install
 
-# Create virtual environment
-python3 -m venv .venv
-
-echo "✅ Project '$PROJECT_NAME' created at $PROJECT_DIR"
+echo ""
+echo "✅ Project '$PROJECT_NAME' created at ~/projects/source/repos/$PROJECT_NAME"
 echo "👉 Next steps:"
-echo "   cd $PROJECT_DIR"
+echo "   cd ~/projects/source/repos/$PROJECT_NAME"
 echo "   code ."
