@@ -6,7 +6,14 @@
 TEMPLATE="scripts"
 PROJECT_NAME=""
 AUTHOR="$(git config user.name)"
-EMAIL="$(git config user.email)"
+RAW_EMAIL="$(git config user.email)"
+if [[ "$RAW_EMAIL" == *"@users.noreply.github.com" ]]; then
+  echo "ℹ️  GitHub noreply email detected. Project templates use your email in README and config files."
+  read -p "Enter your real email address: " EMAIL
+  EMAIL="${EMAIL:-your-email@example.com}"
+else
+  EMAIL="$RAW_EMAIL"
+fi
 PYTHON_VERSION="$(python3 --version | cut -d' ' -f2 | cut -d'.' -f1,2)"
 DESCRIPTION="A short description of the project"
 
