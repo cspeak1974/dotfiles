@@ -47,6 +47,6 @@ install: ## Set up dotfiles on a new machine
 		echo "  ✅ Added dotfiles/scripts to PATH"; \
 	fi
 
-	@echo ""
+@echo ""
 	@echo "✅ Dotfiles setup complete!"
-	@echo "👉 Run 'source ~/.bashrc' to reload your shell"
+	@echo "👉 Run 'source ~/.bashrc' to reload your shell (required to apply PATH changes)"
