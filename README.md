@@ -61,6 +61,35 @@ Options:
 Templates: scripts, api, package, data, cli
 ```
 
+## Templates
+
+### `scripts` (default)
+For automation, tooling, and one-off scripts. Flat layout.
+
+```
+├── scripts/        ← your Python scripts
+├── tests/          ← pytest tests
+├── docs/           ← architecture and design notes
+├── .vscode/        ← VS Code workspace settings
+├── .env.example    ← environment variable template
+├── .gitignore
+├── Makefile
+├── README.md
+└── requirements.txt
+```
+
+### `api` *(coming soon)*
+For FastAPI/Flask services. Domain-driven flat layout with routers, services, models, and schemas.
+
+### `package` *(coming soon)*
+For reusable Python libraries intended for PyPI distribution. Uses src layout.
+
+### `data` *(coming soon)*
+For data science and ML projects. Based on Cookiecutter Data Science standard with notebooks, data pipeline structure, and model directories.
+
+### `cli` *(coming soon)*
+For installable command line tools. Uses src layout with pyproject.toml.
+
 ## Claude Code slash commands
 
 Custom slash commands available in Claude Code after running `make install`:
