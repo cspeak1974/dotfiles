@@ -23,7 +23,7 @@ install: ## Set up dotfiles on a new machine
 	done
 
 	@echo "📦 Checking pipx..."
-	@if ! command -v pipx &> /dev/null; then \
+	@if ! which pipx > /dev/null 2>&1; then \
 		echo "  Installing pipx..."; \
 		sudo apt install pipx -y; \
 		pipx ensurepath; \
@@ -32,7 +32,7 @@ install: ## Set up dotfiles on a new machine
 	fi
 
 	@echo "🍪 Checking cookiecutter..."
-	@if ! command -v cookiecutter &> /dev/null; then \
+	@if ! which cookiecutter > /dev/null 2>&1; then \
 		echo "  Installing cookiecutter..."; \
 		pipx install cookiecutter; \
 	else \
