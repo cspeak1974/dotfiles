@@ -34,6 +34,16 @@ variables injected at runtime by the deployment platform.
 
 _Document your key design decisions here._
 
+## Testing Guidelines
+
+- Write tests for every new script or function
+- Use `pytest` as the test framework
+- Mock all external API calls using `unittest.mock.patch` — never make real API calls in tests
+- Always cover the happy path for every function
+- Cover at least one error/sad path per function (e.g. API returns 4xx, missing env vars)
+- Test files live in `tests/` and mirror the script name (e.g. `scripts/joiner.py` → `tests/test_joiner.py`)
+- Run tests with `make test`
+
 ## What's Done
 
 - [x] Project scaffolded
