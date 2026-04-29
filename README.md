@@ -101,21 +101,23 @@ Custom slash commands available in Claude Code after running `make install`:
 
 ## VS Code settings
 
-The `bash-venv` terminal profile activates `.venv` automatically when opening
-a terminal in any project that has a virtual environment. The following settings
-are included automatically in all project templates:
+The following settings are included automatically in all project templates:
 
 ```jsonc
 {
     "terminal.integrated.defaultProfile.linux": "bash-venv",
     "terminal.integrated.automationProfile.linux": null,
     "python.terminal.useEnvFile": true,
-    "python.envFile": "${workspaceFolder}/.env"
+    "python.envFile": "${workspaceFolder}/.env",
+    "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+    "python.analysis.extraPaths": ["${workspaceFolder}/scripts"]
 }
 ```
 
 - `bash-venv` — activates `.venv` automatically on terminal open
 - `python.terminal.useEnvFile` — injects `.env` variables into the terminal
 - `python.envFile` — points VS Code to the `.env` file in the project root
+- `python.defaultInterpreterPath` — explicitly points to `.venv` to fix interpreter detection
+- `python.analysis.extraPaths` — adds `scripts/` to Pylance's analysis path, fixing import warnings
 
 This is included automatically in all project templates.
