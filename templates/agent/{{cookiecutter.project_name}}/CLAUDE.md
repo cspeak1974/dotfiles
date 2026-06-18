@@ -37,7 +37,14 @@ variables injected at runtime by the deployment platform.
 
 ## Key Design Decisions
 
-_Document your key design decisions here._
+### Hardcoded `agent/` package name
+
+The source package is always named `agent/`, not `{{cookiecutter.project_slug}}/`. This keeps import
+paths clean (`from agent.tools import ...`) and mirrors how the `scripts` template hardcodes
+`scripts/`. The tradeoff: if you install two agent projects into the same virtualenv, the package
+names collide. To fix this, rename `agent/` to match your project slug and update all imports.
+
+_Document your own design decisions below._
 
 ## Testing Guidelines
 
@@ -48,6 +55,21 @@ _Document your key design decisions here._
 - Cover at least one error/sad path per function (e.g. unknown tool name, missing API key)
 - Test files live in `tests/` and mirror the module name (e.g. `agent/tools.py` → `tests/test_tools.py`)
 - Run tests with `make test`
+
+## How the Loop Works
+
+`run_agent()` in `agent/loop.py` runs a streaming agentic loop against `claude-opus-4-8` with
+adaptive thinking enabled. Each iteration:
+
+1. Calls `client.messages.stream()` and collects the final message via `get_final_message()`
+2. If `stop_reason == "tool_use"`: executes all tool calls, appends results, and loops
+3. If `stop_reason == "end_turn"`: returns the first text block
+
+To change the model, update `MODEL` at the top of `agent/loop.py`.
+
+`load_dotenv()` is called at import time in `client.py`, so any file that imports from the
+`agent` package automatically loads `.env`. Tests bypass this by mocking `get_client` rather
+than loading real credentials.
 
 ## Adding Tools
 
