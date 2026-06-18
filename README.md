@@ -93,8 +93,23 @@ For data science and ML projects. Based on Cookiecutter Data Science standard wi
 ### `cli` *(coming soon)*
 For installable command line tools. Uses src layout with pyproject.toml.
 
-### `agent` *(coming soon)*
-For agentic AI projects — tool use, state management, and LLM orchestration.
+### `agent`
+For agentic AI projects — tool use, state management, and LLM orchestration with `claude-opus-4-8`.
+
+```
+├── agent/          ← agent package (client, tools, loop)
+│   ├── client.py   ← Anthropic client factory
+│   ├── loop.py     ← agentic loop
+│   └── tools.py    ← tool definitions and execution
+├── tests/          ← pytest tests
+├── docs/           ← architecture and design notes
+├── .vscode/        ← VS Code workspace settings
+├── .env.example    ← environment variable template
+├── .gitignore
+├── Makefile
+├── README.md
+└── requirements.txt
+```
 
 ## Claude Code slash commands
 
