@@ -50,7 +50,7 @@ while [[ $# -gt 0 ]]; do
       echo "  --python,      -p  Python version (default: current python3 version)"
       echo "  --description, -d  Project description"
       echo ""
-      echo "Templates: scripts, api, package, data, cli"
+      echo "Templates: scripts, api, package, data, cli, agent"
       exit 0
       ;;
     *)
@@ -70,7 +70,7 @@ TEMPLATE_DIR="$HOME/dotfiles/templates/$TEMPLATE"
 
 if [ ! -d "$TEMPLATE_DIR" ]; then
   echo "Error: template '$TEMPLATE' not found at $TEMPLATE_DIR"
-  echo "Available templates: scripts, api, package, data, cli"
+  echo "Available templates: scripts, api, package, data, cli, agent"
   exit 1
 fi
 

@@ -48,6 +48,9 @@ The `make install` target will:
 
 ## Creating a new Python project
 
+`new-py` is an alias for `new-python-project.sh` defined in `~/.bashrc`. Make sure
+you've sourced your shell after running `make install`.
+
 ```bash
 new-py <project-name> [options]
 
@@ -58,7 +61,7 @@ Options:
   --email, -e        Author email
   --python, -p       Python version
 
-Templates: scripts, api, package, data, cli
+Templates: scripts, api, package, data, cli, agent
 ```
 
 ## Templates
@@ -89,6 +92,9 @@ For data science and ML projects. Based on Cookiecutter Data Science standard wi
 
 ### `cli` *(coming soon)*
 For installable command line tools. Uses src layout with pyproject.toml.
+
+### `agent` *(coming soon)*
+For agentic AI projects — tool use, state management, and LLM orchestration.
 
 ## Claude Code slash commands
 

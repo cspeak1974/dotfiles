@@ -44,6 +44,18 @@ _Document your key design decisions here._
 - Test files live in `tests/` and mirror the script name (e.g. `scripts/joiner.py` → `tests/test_joiner.py`)
 - Run tests with `make test`
 
+## Dotfiles & Scaffolding
+
+This project was created with `new-py` from `github.com/cspeak1974/dotfiles`.
+
+Available templates (use `new-py <name> -t <template>`):
+- `scripts` ✅ — Python automation scripts (this template)
+- `api` — FastAPI-based services and webhook receivers
+- `package` — Reusable Python libraries with src/ layout
+- `data` — Data analysis and pipeline projects
+- `cli` — Command-line tools
+- `agent` — Agentic AI projects (tool use, state management, LLM orchestration)
+
 ## What's Done
 
 - [x] Project scaffolded
