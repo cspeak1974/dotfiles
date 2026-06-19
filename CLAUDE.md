@@ -10,6 +10,7 @@ dotfiles/
 ├── scripts/            ← shell scripts on PATH (~/.bashrc adds ~/dotfiles/scripts)
 ├── templates/          ← Cookiecutter project templates
 │   ├── agent/          ← agentic AI projects (Anthropic SDK, tool use)
+│   ├── api/            ← FastAPI services and webhook receivers
 │   └── scripts/        ← Python automation scripts (default)
 ├── Makefile            ← dotfiles setup (make install)
 └── README.md
@@ -35,7 +36,7 @@ dotfiles/
 |-----------|-------------|-------------------------------------------------|
 | `scripts` | ✅ Built    | Python automation scripts, flat layout          |
 | `agent`   | ✅ Built    | Agentic AI projects (Anthropic SDK, tool use)   |
-| `api`     | Coming soon | FastAPI/Flask services                          |
+| `api`     | ✅ Built    | FastAPI services and webhook receivers          |
 | `package` | Coming soon | Reusable Python libraries (src layout, PyPI)    |
 | `data`    | Coming soon | Data science / ML projects                      |
 | `cli`     | Coming soon | Installable command-line tools                  |

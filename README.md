@@ -81,8 +81,18 @@ For automation, tooling, and one-off scripts. Flat layout.
 └── requirements.txt
 ```
 
-### `api` *(coming soon)*
-For FastAPI/Flask services. Domain-driven flat layout with routers, services, models, and schemas.
+### `api`
+For FastAPI services and webhook receivers. Router-per-domain layout with Pydantic models, `TestClient` tests, and `make dev` for hot-reload.
+
+```
+api/
+├── main.py         ← FastAPI app factory and lifespan
+├── models.py       ← Pydantic request/response models
+└── routes/
+    └── health.py   ← GET /health
+tests/
+docs/
+```
 
 ### `package` *(coming soon)*
 For reusable Python libraries intended for PyPI distribution. Uses src layout.
