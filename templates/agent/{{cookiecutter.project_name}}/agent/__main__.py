@@ -13,7 +13,11 @@ def main() -> None:
             continue
         if user_input.lower() in ("quit", "exit", "q"):
             break
-        response = run_agent(user_input)
+        try:
+            response = run_agent(user_input)
+        except ValueError as e:
+            print(f"\nError: {e}\n")
+            continue
         print(f"\nAgent: {response}\n")
 
 
